@@ -1,8 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
-  Home: undefined;
-  Favorites: undefined;
+  MainTabs: undefined;
+  EventModal: { id: number };
 };
 
 export type RootNavigationTabParams<Screen extends keyof RootStackParamList> =

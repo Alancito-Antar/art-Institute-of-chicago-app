@@ -1,6 +1,6 @@
 import { CompositeScreenProps } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootNavigationTabParams } from "../root/types";
+import { RootNavigationTabParams } from "../../root/types";
 
 export type FavoritesNavigationParams = {
   FavoritesMain: undefined;
