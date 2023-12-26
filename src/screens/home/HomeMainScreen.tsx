@@ -9,31 +9,29 @@ import {
 } from "react-native";
 import { useGetEventsQuery } from "../../services/events/events";
 import { HomeStackScreenProps } from "../../navigation/main_tabs/home/types";
+import EventCards from "../../components/EventCard";
+import EventCard from "../../components/EventCard";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function HomeMainScreen({
   navigation,
 }: HomeStackScreenProps<"HomeMain">) {
-  const { width } = useWindowDimensions();
   const { data: events, isLoading, error } = useGetEventsQuery();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: insets.top, backgroundColor: "white" }}>
       <FlatList
+        contentContainerStyle={{ padding: 20, alignItems: "center" }}
         data={events?.data}
         numColumns={2}
-        columnWrapperStyle={{ gap: 10 }}
+        columnWrapperStyle={{ gap: 12 }}
+        ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
         renderItem={({ item }) => (
-          <Pressable
-            style={{ flex: 1 }}
-            onPress={() => navigation.navigate("EventModal", { id: item.id })}
-          >
-            <Image
-              style={{ width: width / 2, height: 100 }}
-              source={{ uri: item.image_url }}
-            />
-            {/* <Text>{item.title}</Text> */}
-            <Text>{item.short_description}</Text>
-          </Pressable>
+          <EventCard
+            event={item}
+            onPress={(id) => navigation.navigate("EventModal", { id })}
+          />
         )}
       />
 
