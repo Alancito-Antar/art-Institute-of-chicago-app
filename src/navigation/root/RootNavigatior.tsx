@@ -1,45 +1,35 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeStackNavigator from "../home/HomeNavigator";
-import FavoritesStackNavigator from "../favorites/FavoritesNavigator";
+import EventScreen from "../../screens/events/EventScreen";
+import HomeStackNavigator from "../main_tabs/home/HomeNavigator";
 import { RootStackParamList } from "./types";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const RootNavigationTabBar = createBottomTabNavigator<RootStackParamList>();
+const RootNavigationStack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <RootNavigationTabBar.Navigator
-      initialRouteName="Home"
+    <RootNavigationStack.Navigator
+      initialRouteName="MainTabs"
       screenOptions={() => ({
-        tabBarShowLabel: false,
-        // headerStyle: {
-        //   backgroundColor: tw.color("white"),
-        // },
-        // headerTintColor: tw.color("gray-900"),
-        // headerTitleStyle: tw.style(h6TextStyle),
-        // // headerBackTitle: 'Back',
-        // headerBackTitleStyle: {
-        //   color: tw.color("gray-900"),
-        // },
-        // lazy: false,
+        headerShown: false,
       })}
-      // tabBar={(props: BottomTabBarProps) => <TabBar {...props} />}
     >
-      <RootNavigationTabBar.Screen
-        name="Home"
-        component={HomeStackNavigator}
-        options={() => ({
-          headerShown: false,
-        })}
-      />
+      <RootNavigationStack.Group>
+        <RootNavigationStack.Screen
+          name="MainTabs"
+          component={HomeStackNavigator}
+          options={() => ({
+            headerShown: false,
+          })}
+        />
+      </RootNavigationStack.Group>
 
-      <RootNavigationTabBar.Screen
-        name="Favorites"
-        component={FavoritesStackNavigator}
-        options={() => ({
-          headerShown: false,
-        })}
-      />
-    </RootNavigationTabBar.Navigator>
+      {/* Modals */}
+      <RootNavigationStack.Group
+        screenOptions={{ presentation: "fullScreenModal" }}
+      >
+        <RootNavigationStack.Screen name="EventModal" component={EventScreen} />
+      </RootNavigationStack.Group>
+    </RootNavigationStack.Navigator>
   );
 }
 export default RootNavigator;
