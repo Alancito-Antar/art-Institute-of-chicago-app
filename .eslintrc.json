@@ -1,0 +1,87 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "@react-native-community"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    /* So we can require() images */
+    "global-require": "off",
+    //* Don"t require React to be imported
+    "react/react-in-jsx-scope": "off",
+    /* Dont require DefaultProps */
+    "react/require-default-props": "off",
+    /* Allow spreading props <Component {..props} /> */
+    "react/jsx-props-no-spreading": "off",
+    /* Don"t require escaped HTML entities because we are not making a website lol */
+    "react/no-unescaped-entities": "off",
+    /* Allow nestable components as props becase react-navigation kinda depends on them */
+    "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
+    /* Fix false positives for unresolved imports */
+    "import/no-unresolved": 0,
+    /* Allow JSX in ts */
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx", ".ts", ".js"]
+      }
+    ],
+    // Prettier config
+    "prettier/prettier": [
+      "error",
+      {
+        //   "singleQuote": true,
+        //   "trailingComma": "all",
+        //   "arrowParens": "avoid",
+        //   "endOfLine": "auto"
+      }
+    ],
+    /* So we can import .json files still */
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    /* Disable react prop types validation */
+    "react/prop-types": 0,
+    /* Fix enums showing as already declared in upper scope */
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    /* Stop package.json used for absolute imports from making it throw errors about dependencies not being listed */
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "packageDir": "." }
+    ],
+    /* use typescript func-call-spacing instead of func-call-spacing cos the former doesn"t work for generic arugments */
+    "no-spaced-func": "off",
+    "@typescript-eslint/func-call-spacing": ["error"],
+    /* Use typescript dot-notation instead */
+    "dot-notation": "off",
+    "@typescript-eslint/dot-notation": ["error"],
+    "@typescript-eslint/naming-convention": "off"
+    // "react/forbid-elemens": [1, { "forbid": [{"element": "SafeAreaView", "message": "Don't use SafeAreaView. It's bad. Try useSafeAreaInsets or useSafeAreaFrame."}]}]
+  }
+}
