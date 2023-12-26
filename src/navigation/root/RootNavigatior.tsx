@@ -1,5 +1,5 @@
 import EventScreen from "../../screens/events/EventScreen";
-import HomeStackNavigator from "../main_tabs/home/HomeNavigator";
+import MainTabsNavigator from "../main_tabs/MainTabsNavigatior";
 import { RootStackParamList } from "./types";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -16,7 +16,7 @@ function RootNavigator() {
       <RootNavigationStack.Group>
         <RootNavigationStack.Screen
           name="MainTabs"
-          component={HomeStackNavigator}
+          component={MainTabsNavigator}
           options={() => ({
             headerShown: false,
           })}

@@ -31,7 +31,8 @@ export default function HomeMainScreen({
               style={{ width: width / 2, height: 100 }}
               source={{ uri: item.image_url }}
             />
-            <Text>{item.title}</Text>
+            {/* <Text>{item.title}</Text> */}
+            <Text>{item.short_description}</Text>
           </Pressable>
         )}
       />

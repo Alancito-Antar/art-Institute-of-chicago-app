@@ -2,9 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { eventsApi } from "../services/events/events";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import api from "../services/api";
+import favoritesSlice from "./favorites/favoritesSlice";
 
 export const store = configureStore({
   reducer: {
+    favorites: favoritesSlice.reducer,
+    // API
     [api.reducerPath]: api.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
