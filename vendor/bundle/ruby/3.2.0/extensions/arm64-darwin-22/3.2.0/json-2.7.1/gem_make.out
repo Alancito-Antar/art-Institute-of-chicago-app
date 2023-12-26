@@ -1,0 +1,16 @@
+current directory: /Users/alanantar/Documents/Dev/Challenges/art-Institute-of-chicago-app/ArtInstituteOfChicagoApp/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+/opt/homebrew/opt/ruby/bin/ruby -I /opt/homebrew/lib/ruby/site_ruby/3.2.0 extconf.rb
+creating Makefile
+
+current directory: /Users/alanantar/Documents/Dev/Challenges/art-Institute-of-chicago-app/ArtInstituteOfChicagoApp/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231226-7538-ivnqn7 sitelibdir\=./.gem.20231226-7538-ivnqn7 clean
+
+current directory: /Users/alanantar/Documents/Dev/Challenges/art-Institute-of-chicago-app/ArtInstituteOfChicagoApp/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231226-7538-ivnqn7 sitelibdir\=./.gem.20231226-7538-ivnqn7
+make: Nothing to be done for `all'.
+
+current directory: /Users/alanantar/Documents/Dev/Challenges/art-Institute-of-chicago-app/ArtInstituteOfChicagoApp/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231226-7538-ivnqn7 sitelibdir\=./.gem.20231226-7538-ivnqn7 install
+
+current directory: /Users/alanantar/Documents/Dev/Challenges/art-Institute-of-chicago-app/ArtInstituteOfChicagoApp/vendor/bundle/ruby/3.2.0/gems/json-2.7.1/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231226-7538-ivnqn7 sitelibdir\=./.gem.20231226-7538-ivnqn7 clean
