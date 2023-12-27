@@ -1,7 +1,6 @@
 import React from "react";
 import {
-  Image,
-  ScrollView,
+  ActivityIndicator,
   StyleSheet,
   Text,
   View,
@@ -17,6 +16,11 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import EventCountdown from "./components/EventCountdown";
+import EventImage from "./components/EventImage";
+import EventHost from "./components/EventHostAndInfo";
+import EventInfo from "./components/EventInfo";
+import EventActions from "./components/EventActions";
+import EventHostAndInfo from "./components/EventHostAndInfo";
 
 export default function EventScreen({
   navigation,
@@ -28,17 +32,12 @@ export default function EventScreen({
   // Lets handle y scroll offset to animate header
   const offset = useSharedValue(0);
 
-  const { width } = useWindowDimensions();
-
-  const { data: event, isLoading, error } = useGetEventByIdQuery({ id });
-
-  const source = {
-    html:
-      event?.description ||
-      `<p style='text-align:center;'>
-  Oh no, there was an error!
-</p>`,
-  };
+  const {
+    data: event,
+    isLoading,
+    isFetching,
+    error,
+  } = useGetEventByIdQuery({ id });
 
   const scrollHandler = useAnimatedScrollHandler(
     {
@@ -57,58 +56,40 @@ export default function EventScreen({
     navigation.goBack();
   }, []);
 
+  if (isLoading || isFetching) {
+    return (
+      <View style={styles.loadingContainer}>
+        <EventHeader offsetY={offset} />
+        <ActivityIndicator color="#B60235" />
+      </View>
+    );
+  }
+
   if (!event) {
     return null;
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <EventHeader event={event} offsetY={offset} />
-
       <Animated.ScrollView
         style={styles.container}
         contentContainerStyle={[
           styles.contentContainer,
-          { paddingTop: insets.top, paddingBottom: insets.bottom },
+          { paddingTop: insets.top, paddingBottom: insets.bottom + 100 },
         ]}
         onScroll={scrollHandler}
       >
-        <View
-          style={{
-            paddingHorizontal: 20,
-          }}
-        >
-          <EventCountdown event={event} />
-
-          {/* Add countdown */}
-
-          <Image
-            style={{
-              height: 400,
-              width: width - 40,
-              marginBottom: 20,
-              borderRadius: 10,
-            }}
-            source={{ uri: event?.image_url }}
-          />
-
-          {/* Host info */}
-          <View style={{ marginBottom: 20 }}>
-            <Text>Event host: {event?.event_host_title || "Unknown"}</Text>
-          </View>
-
-          {/* Event info */}
-          <View>
-            <Text style={{ marginBottom: 10, fontSize: 18, fontWeight: "700" }}>
-              {event?.title}
-            </Text>
-
-            <RenderHTML contentWidth={width} source={source} />
-          </View>
-
+        <View style={styles.contentContainer}>
           {error ? <Text>{JSON.stringify(error)}</Text> : null}
+
+          <EventCountdown event={event} />
+          <EventImage event={event} />
+          <EventHostAndInfo event={event} />
+          <EventInfo event={event} />
         </View>
       </Animated.ScrollView>
+      <EventActions event={event} />
     </View>
   );
 }
@@ -117,5 +98,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  contentContainer: {},
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  contentContainer: {
+    paddingHorizontal: 10,
+  },
 });

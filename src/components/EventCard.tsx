@@ -15,7 +15,7 @@ export default function EventCard({
   event: Event;
   onPress: (id: number) => void;
 }) {
-  const { id, image_url, short_description } = event;
+  const { id, image_url, short_description, header_description } = event;
   const { width } = useWindowDimensions();
 
   const ITEM_WIDTH = width / 2 - 20; // This is getting the whole screen width and dividing it by two (and substracting the padding)

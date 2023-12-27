@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { saveFavoritesData } from "../../../store/favorites/favoritesSlice";
 import { Event } from "../../../services/events/types";
 import Animated, {
@@ -15,11 +15,17 @@ export default function EventHeader({
   event,
   offsetY,
 }: {
-  event: Event | undefined;
+  event?: Event;
   offsetY: SharedValue<number>;
 }) {
-  const navigation = useNavigation();
+  const isFavorite =
+    useAppSelector((state) => state.favorites.events).findIndex(
+      (x) => event?.id === x.id
+    ) !== -1;
+
   const dispatch = useAppDispatch();
+
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
   const animatedStyles = useAnimatedStyle(() => {
@@ -51,12 +57,19 @@ export default function EventHeader({
           source={require("../../../assets/icons/event/ic_chevron_left.png")}
         />
       </Pressable>
-      <Pressable onPress={onSavedPressed}>
-        <Image
-          style={styles.backButtonImage}
-          source={require("../../../assets/icons/common/ic_favorites.png")}
-        />
-      </Pressable>
+
+      {event ? (
+        <Pressable onPress={onSavedPressed}>
+          <Image
+            style={styles.backButtonImage}
+            source={
+              isFavorite
+                ? require("../../../assets/icons/event/ic_favorites_full.png")
+                : require("../../../assets/icons/common/ic_favorites.png")
+            }
+          />
+        </Pressable>
+      ) : null}
     </View>
   );
 }

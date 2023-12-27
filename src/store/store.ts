@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { eventsApi } from "../services/events/events";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import api from "../services/api";
 import favoritesSlice from "./favorites/favoritesSlice";
