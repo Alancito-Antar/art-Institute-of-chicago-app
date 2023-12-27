@@ -2,14 +2,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Event } from "./types";
 import api from "../api";
-import { DataResponse, PagedDataResponse } from "../types";
+import { DataResponse, PagedDataResponse, PaginationParams } from "../types";
 
 // Define a service using a base URL and expected endpoints
 export const eventsApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    getEvents: builder.query<PagedDataResponse<Event[]>, void>({
-      query: () => `events`,
+    getEvents: builder.query<PagedDataResponse<Event[]>, PaginationParams>({
+      query: (params) => {
+        const searchParams = new URLSearchParams();
+
+        if (params?.current_page) {
+          searchParams.set("page", params.current_page.toString());
+        }
+
+        if (params?.offset) {
+          searchParams.set("limit", params.offset.toString());
+        }
+
+        return { url: `events?${searchParams.toString()}`, method: "get" };
+      },
     }),
     getEventById: builder.query<Event, { id: number }>({
       query: ({ id }) => `events/${id}`,
@@ -20,4 +32,8 @@ export const eventsApi = api.injectEndpoints({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetEventsQuery, useGetEventByIdQuery } = eventsApi;
+export const {
+  useGetEventsQuery,
+  useLazyGetEventsQuery,
+  useGetEventByIdQuery,
+} = eventsApi;
