@@ -21,7 +21,7 @@ function TabBarIcon(props: TabBarIconProps) {
       iconSource = require("../../assets/icons/tab_bar/ic_home.png");
       break;
     case "Favorites":
-      iconSource = require("../../assets/icons/tab_bar/ic_favorites.png");
+      iconSource = require("../../assets/icons/common/ic_favorites.png");
       break;
     default:
       iconSource = undefined;

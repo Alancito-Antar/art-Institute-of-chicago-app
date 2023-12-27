@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { useAppSelector } from "../../store/hooks";
 import EventCard from "../../components/EventCard";
 import {
@@ -13,7 +13,7 @@ export default function FavoritesMainScreen({
   const favoritesEvents = useAppSelector((state) => state.favorites.events);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Favorites</Text>
       <FlatList
         contentContainerStyle={{ padding: 20, alignItems: "center" }}
@@ -31,3 +31,9 @@ export default function FavoritesMainScreen({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
