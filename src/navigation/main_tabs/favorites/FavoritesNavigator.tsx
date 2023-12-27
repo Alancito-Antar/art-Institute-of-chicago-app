@@ -6,7 +6,7 @@ const NavigationStack = createNativeStackNavigator<FavoritesNavigationParams>();
 
 export default function FavoritesStackNavigator() {
   return (
-    <NavigationStack.Navigator>
+    <NavigationStack.Navigator screenOptions={{ headerShown: false }}>
       <NavigationStack.Screen
         name="FavoritesMain"
         component={FavoritesMainScreen}

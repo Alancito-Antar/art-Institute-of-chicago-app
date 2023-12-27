@@ -1,11 +1,27 @@
-import { FlatList, FlatListProps, StyleSheet, View } from 'react-native';
+import {
+  SectionList,
+  SectionListProps,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import useCustomDateLabel from '../hooks/useCustomDateLabel';
 import { Event } from '../services/events/types';
 import EventCard from './EventCard';
+
+function SectionLabel({ date }: { date: string }) {
+  const dateLabel = useCustomDateLabel(date);
+  return (
+    <View style={styles.sectionLabelContainer}>
+      <Text style={styles.sectionLabelText}>{dateLabel}</Text>
+    </View>
+  );
+}
 
 // Little re-usable grid for events so it mantains the same syle for favorites and main screen
 // Thought we dont use the API call here so each screen can give the items they want (favorites, or API events)
 
-interface EventsGridProps extends FlatListProps<Event> {
+interface EventsGridProps extends SectionListProps<Event> {
   onItemPress: (id: number) => void;
 }
 
@@ -14,12 +30,13 @@ export default function EventsGrid(props: Omit<EventsGridProps, 'renderItem'>) {
   const { onItemPress } = props;
 
   return (
-    <FlatList
+    <SectionList
       {...props}
       contentContainerStyle={styles.contentContainerStyle}
-      columnWrapperStyle={styles.columnWrapperStyle}
-      numColumns={2}
-      ItemSeparatorComponent={() => <View style={styles.separatorContainer} />}
+      stickySectionHeadersEnabled
+      renderSectionHeader={({ section: { groupDate } }) => (
+        <SectionLabel date={groupDate} />
+      )}
       renderItem={({ item }) => (
         <EventCard event={item} onPress={onItemPress} />
       )}
@@ -28,7 +45,7 @@ export default function EventsGrid(props: Omit<EventsGridProps, 'renderItem'>) {
 }
 
 const styles = StyleSheet.create({
-  contentContainerStyle: { padding: 20, alignItems: 'center' },
-  columnWrapperStyle: { gap: 12 },
-  separatorContainer: { height: 20 },
+  contentContainerStyle: { padding: 20, gap: 10 },
+  sectionLabelContainer: { paddingVertical: 10, backgroundColor: 'white' },
+  sectionLabelText: { fontSize: 13, fontWeight: '600', color: 'gray' },
 });

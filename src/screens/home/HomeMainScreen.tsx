@@ -1,18 +1,25 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventsGrid from '../../components/EventsGrid';
+import { processEventsNewPage } from '../../helpers/events';
 import useEffectOnce from '../../hooks/useEffectOnce';
 import { HomeStackScreenProps } from '../../navigation/main_tabs/home/types';
 import { useLazyGetEventsQuery } from '../../services/events/events';
 import { Event } from '../../services/events/types';
+
+export interface EventGroup {
+  groupDate: string;
+  data: Event[];
+}
 
 const PAGE_SIZE = 10;
 export default function HomeMainScreen({
   navigation,
 }: HomeStackScreenProps<'HomeMain'>) {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
-  const [events, setEvents] = React.useState<Event[]>([]);
+  const [events, setEvents] = React.useState<EventGroup[]>([]);
 
   const [fetchEvents, { data, isLoading, isFetching, error }] =
     useLazyGetEventsQuery();
@@ -21,7 +28,7 @@ export default function HomeMainScreen({
 
   // Loads a new page of data and updates the state
   const loadPage = React.useCallback(
-    async (page: number, currentData: Event[]) => {
+    async (page: number, currentData: EventGroup[]) => {
       try {
         console.debug('Loading page: ', page);
 
@@ -30,9 +37,7 @@ export default function HomeMainScreen({
           page,
         }).unwrap();
 
-        const updatedData = [...currentData, ...newEvents.data];
-
-        setEvents(updatedData);
+        setEvents(processEventsNewPage(newEvents, currentData));
         setCurrentPage(page);
       } catch {
         // No need to do anything, isError will be set in the hook return value
@@ -74,7 +79,7 @@ export default function HomeMainScreen({
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       <EventsGrid
-        data={events}
+        sections={events}
         onItemPress={onEventPress}
         ListFooterComponent={() => {
           // if (isError && !isFetching) {
