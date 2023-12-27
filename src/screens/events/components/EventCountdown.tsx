@@ -15,11 +15,19 @@ export default function EventCountdown({
     isEventOngoing ? event!!.start_date : event!!.end_date
   );
 
+  if (hasEnded === undefined) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.heading}>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
         {hasEnded ? "Ended" : isEventOngoing ? "Starts in:" : "Ending in:"}
       </Text>
+
       {!hasEnded ? (
         <View style={styles.countdownContainer}>
           <Text>{days}d</Text>

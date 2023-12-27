@@ -42,7 +42,9 @@ export function useTimer(targetTime: string) {
   const [timeLeft, setTimeLeft] = React.useState<number>(
     moment(targetTime).diff(moment(new Date()))
   );
-  const [hasEnded, setHasEnded] = React.useState<boolean>(true);
+  const [hasEnded, setHasEnded] = React.useState<boolean | undefined>(
+    undefined
+  );
 
   React.useEffect(() => {
     const id = setTimeout(() => {
