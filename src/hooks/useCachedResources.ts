@@ -1,7 +1,6 @@
-import React from "react";
-import * as Font from "expo-font";
-import { loadFavoritesData } from "../store/favorites/favoritesSlice";
-import { store } from "../store/store";
+import React from 'react';
+import { loadFavoritesData } from '../store/favorites/favoritesSlice';
+import { store } from '../store/store';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);

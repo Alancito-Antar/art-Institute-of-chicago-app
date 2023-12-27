@@ -1,18 +1,17 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { Event } from "../../../services/events/types";
-import { useTimer } from "../../../hooks/useTimer";
-import moment from "moment";
+import moment from 'moment';
+import { StyleSheet, Text, View } from 'react-native';
+import useTimer from '../../../hooks/useTimer';
+import { Event } from '../../../services/events/types';
 
 export default function EventCountdown({
   event,
 }: {
   event: Event | undefined;
 }) {
-  const isEventOngoing = moment(event!!.start_date).diff(moment()) > 0; // Lets check if the event has already started or is happening already
+  const isEventOngoing = moment(event!.start_date).diff(moment()) > 0; // Lets check if the event has already started or is happening already
 
   const { days, hours, minutes, seconds, hasEnded } = useTimer(
-    isEventOngoing ? event!!.start_date : event!!.end_date
+    isEventOngoing ? event!.start_date : event!.end_date,
   );
 
   if (hasEnded === undefined) {
@@ -25,7 +24,7 @@ export default function EventCountdown({
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>
-        {hasEnded ? "Ended" : isEventOngoing ? "Starts in:" : "Ending in:"}
+        {hasEnded ? 'Ended' : isEventOngoing ? 'Starts in:' : 'Ending in:'}
       </Text>
 
       {!hasEnded ? (
@@ -43,16 +42,15 @@ export default function EventCountdown({
 const styles = StyleSheet.create({
   container: {
     marginTop: 30,
-    marginBottom: 20,
   },
   heading: {
-    alignSelf: "center",
+    alignSelf: 'center',
     fontSize: 24,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   countdownContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     marginTop: 10,
   },
 });

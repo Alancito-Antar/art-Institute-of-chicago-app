@@ -1,7 +1,8 @@
-import { BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs";
-import { NavigationHelpers, ParamListBase } from "@react-navigation/native";
-import { Image, Pressable, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+/* eslint-disable react-native/no-inline-styles */
+import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs';
+import { NavigationHelpers, ParamListBase } from '@react-navigation/native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface TabBarIconProps {
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
@@ -9,7 +10,7 @@ interface TabBarIconProps {
   focused: boolean;
 }
 
-function TabBarIcon(props: TabBarIconProps) {
+export default function TabBarIcon(props: TabBarIconProps) {
   const { navigation, route, focused } = props;
 
   const insets = useSafeAreaInsets();
@@ -17,11 +18,11 @@ function TabBarIcon(props: TabBarIconProps) {
   let iconSource;
 
   switch (route.name) {
-    case "Home":
-      iconSource = require("../../assets/icons/tab_bar/ic_home.png");
+    case 'Home':
+      iconSource = require('../../assets/icons/tab_bar/ic_home.png');
       break;
-    case "Favorites":
-      iconSource = require("../../assets/icons/common/ic_favorites.png");
+    case 'Favorites':
+      iconSource = require('../../assets/icons/common/ic_favorites.png');
       break;
     default:
       iconSource = undefined;
@@ -30,7 +31,7 @@ function TabBarIcon(props: TabBarIconProps) {
 
   const onPress = () => {
     const event = navigation.emit({
-      type: "tabPress",
+      type: 'tabPress',
       target: route.key,
       canPreventDefault: true,
     });
@@ -44,39 +45,48 @@ function TabBarIcon(props: TabBarIconProps) {
   return (
     <Pressable
       accessibilityRole="button"
-      style={{
-        flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingVertical: 10,
-        paddingBottom: insets.bottom,
-      }}
+      style={[
+        styles.container,
+        {
+          paddingBottom: insets.bottom,
+        },
+      ]}
       onPress={onPress}
     >
       <Image
-        style={{
-          width: 32,
-          height: 32,
-          tintColor: focused ? "#B60235" : "gray",
-        }}
+        style={[
+          styles.iconImage,
+          {
+            tintColor: focused ? '#B60235' : 'gray',
+          },
+        ]}
         source={iconSource}
         resizeMode="contain"
+        accessibilityIgnoresInvertColors
       />
 
-      {focused ? (
-        <View
-          style={{
-            width: 5,
-            height: 5,
-            marginTop: 5,
-            backgroundColor: "#B60235",
-            borderRadius: 2.5,
-          }}
-        />
-      ) : null}
+      {focused ? <View style={styles.selectedBubble} /> : null}
     </Pressable>
   );
 }
 
-export default TabBarIcon;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+  },
+  iconImage: {
+    width: 32,
+    height: 32,
+  },
+  selectedBubble: {
+    width: 5,
+    height: 5,
+    marginTop: 5,
+    backgroundColor: '#B60235',
+    borderRadius: 2.5,
+  },
+});

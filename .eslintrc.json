@@ -6,11 +6,11 @@
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "plugin:prettier/recommended",
-    "@react-native-community"
+    "@react-native-community",
+    "plugin:react-native-a11y/ios"
   ],
   "env": {
-    "browser": true,
-    "es2021": true
+    "jest": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,6 +21,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["test_reports/**"],
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     /* So we can require() images */
@@ -45,15 +46,7 @@
       }
     ],
     // Prettier config
-    "prettier/prettier": [
-      "error",
-      {
-        //   "singleQuote": true,
-        //   "trailingComma": "all",
-        //   "arrowParens": "avoid",
-        //   "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": ["error", {}],
     /* So we can import .json files still */
     "import/extensions": [
       "error",
@@ -70,6 +63,8 @@
     /* Fix enums showing as already declared in upper scope */
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
+    /* Allow assignning props passed to functions otherwise you can"t really use immer */
+    "no-param-reassign": ["error", { "props": false }],
     /* Stop package.json used for absolute imports from making it throw errors about dependencies not being listed */
     "import/no-extraneous-dependencies": [
       "error",
@@ -81,7 +76,9 @@
     /* Use typescript dot-notation instead */
     "dot-notation": "off",
     "@typescript-eslint/dot-notation": ["error"],
-    "@typescript-eslint/naming-convention": "off"
-    // "react/forbid-elemens": [1, { "forbid": [{"element": "SafeAreaView", "message": "Don't use SafeAreaView. It's bad. Try useSafeAreaInsets or useSafeAreaFrame."}]}]
+    "@typescript-eslint/naming-convention": "off",
+    /* This will allow as to have styles at the end of the file for example */
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "off"
   }
 }

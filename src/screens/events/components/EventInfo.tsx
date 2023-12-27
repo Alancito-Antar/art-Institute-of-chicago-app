@@ -1,7 +1,6 @@
-import { View, Text, useWindowDimensions } from "react-native";
-import React from "react";
-import { Event } from "../../../services/events/types";
-import RenderHTML from "react-native-render-html";
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import RenderHTML from 'react-native-render-html';
+import { Event } from '../../../services/events/types';
 
 export default function EventInfo({ event }: { event: Event }) {
   const { width } = useWindowDimensions();
@@ -17,11 +16,12 @@ export default function EventInfo({ event }: { event: Event }) {
 
   return (
     <View>
-      <Text style={{ marginBottom: 10, fontSize: 18, fontWeight: "700" }}>
-        {title}
-      </Text>
-
+      <Text style={styles.infoTitleText}>{title}</Text>
       <RenderHTML contentWidth={width} source={source} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  infoTitleText: { marginBottom: 10, fontSize: 18, fontWeight: '700' },
+});

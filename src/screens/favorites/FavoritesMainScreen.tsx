@@ -1,33 +1,22 @@
-import React from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
-import { useAppSelector } from "../../store/hooks";
-import EventCard from "../../components/EventCard";
-import {
-  FavoritesNavigationParams,
-  FavoritesStackScreenProps,
-} from "../../navigation/main_tabs/favorites/types";
+import { StyleSheet, Text, View } from 'react-native';
+import EventsGrid from '../../components/EventsGrid';
+import { FavoritesStackScreenProps } from '../../navigation/main_tabs/favorites/types';
+import { useAppSelector } from '../../store/hooks';
 
 export default function FavoritesMainScreen({
   navigation,
-}: FavoritesStackScreenProps<"FavoritesMain">) {
-  const favoritesEvents = useAppSelector((state) => state.favorites.events);
+}: FavoritesStackScreenProps<'FavoritesMain'>) {
+  const favoritesEvents = useAppSelector(state => state.favorites.events);
+
+  const onEventPress = (id: number) => {
+    // We could add some analytics here and what not.
+    navigation.navigate('EventModal', { id });
+  };
 
   return (
     <View style={styles.container}>
       <Text>Favorites</Text>
-      <FlatList
-        contentContainerStyle={{ padding: 20, alignItems: "center" }}
-        data={favoritesEvents}
-        numColumns={2}
-        columnWrapperStyle={{ gap: 12 }}
-        ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-        renderItem={({ item }) => (
-          <EventCard
-            event={item}
-            onPress={(id) => navigation.navigate("EventModal", { id })}
-          />
-        )}
-      />
+      <EventsGrid data={favoritesEvents} onItemPress={onEventPress} />
     </View>
   );
 }

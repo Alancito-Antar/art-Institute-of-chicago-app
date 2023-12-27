@@ -1,33 +1,25 @@
-import React from "react";
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
-import { useGetEventByIdQuery } from "../../services/events/events";
-import { RootNavigationTabParams } from "../../navigation/root/types";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import RenderHTML from "react-native-render-html";
-import EventHeader from "./components/EventHeader";
+import React from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
-} from "react-native-reanimated";
-import EventCountdown from "./components/EventCountdown";
-import EventImage from "./components/EventImage";
-import EventHost from "./components/EventHostAndInfo";
-import EventInfo from "./components/EventInfo";
-import EventActions from "./components/EventActions";
-import EventHostAndInfo from "./components/EventHostAndInfo";
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { RootNavigationTabParams } from '../../navigation/root/types';
+import { useGetEventByIdQuery } from '../../services/events/events';
+import EventActions from './components/EventActions';
+import EventCountdown from './components/EventCountdown';
+import EventHeader from './components/EventHeader';
+import EventHostAndInfo from './components/EventHostAndInfo';
+import EventImage from './components/EventImage';
+import EventInfo from './components/EventInfo';
 
 export default function EventScreen({
   navigation,
   route: {
     params: { id },
   },
-}: RootNavigationTabParams<"EventModal">) {
+}: RootNavigationTabParams<'EventModal'>) {
   const insets = useSafeAreaInsets();
   // Lets handle y scroll offset to animate header
   const offset = useSharedValue(0);
@@ -41,11 +33,11 @@ export default function EventScreen({
 
   const scrollHandler = useAnimatedScrollHandler(
     {
-      onScroll: (e) => {
+      onScroll: e => {
         offset.value = e.contentOffset.y;
       },
     },
-    []
+    [],
   );
 
   React.useEffect(() => {
@@ -54,7 +46,7 @@ export default function EventScreen({
     }
 
     navigation.goBack();
-  }, []);
+  }, [event, isLoading, navigation]);
 
   if (isLoading || isFetching) {
     return (
@@ -100,10 +92,11 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   contentContainer: {
     paddingHorizontal: 10,
+    gap: 20,
   },
 });

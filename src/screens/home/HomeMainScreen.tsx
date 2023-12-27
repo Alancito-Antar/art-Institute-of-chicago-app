@@ -1,31 +1,20 @@
-import React from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Image,
-  Pressable,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
-import {
-  useGetEventsQuery,
-  useLazyGetEventsQuery,
-} from "../../services/events/events";
-import { HomeStackScreenProps } from "../../navigation/main_tabs/home/types";
-import EventCards from "../../components/EventCard";
-import EventCard from "../../components/EventCard";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Event } from "../../services/events/types";
+import React from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import EventsGrid from '../../components/EventsGrid';
+import useEffectOnce from '../../hooks/useEffectOnce';
+import { HomeStackScreenProps } from '../../navigation/main_tabs/home/types';
+import { useLazyGetEventsQuery } from '../../services/events/events';
+import { Event } from '../../services/events/types';
 
 const PAGE_SIZE = 10;
 export default function HomeMainScreen({
   navigation,
-}: HomeStackScreenProps<"HomeMain">) {
+}: HomeStackScreenProps<'HomeMain'>) {
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [events, setEvents] = React.useState<Event[]>([]);
 
-  const [fetchEvents, { data, isLoading, isFetching, isError, error }] =
+  const [fetchEvents, { data, isLoading, isFetching, error }] =
     useLazyGetEventsQuery();
 
   const insets = useSafeAreaInsets();
@@ -34,14 +23,14 @@ export default function HomeMainScreen({
   const loadPage = React.useCallback(
     async (page: number, currentData: Event[]) => {
       try {
-        console.debug("Loading page: ", page);
+        console.debug('Loading page: ', page);
 
-        const newTransactions = await fetchEvents({
-          offset: PAGE_SIZE,
-          current_page: page,
+        const newEvents = await fetchEvents({
+          limit: PAGE_SIZE,
+          page,
         }).unwrap();
 
-        const updatedData = [...currentData, ...newTransactions.data];
+        const updatedData = [...currentData, ...newEvents.data];
 
         setEvents(updatedData);
         setCurrentPage(page);
@@ -49,7 +38,7 @@ export default function HomeMainScreen({
         // No need to do anything, isError will be set in the hook return value
       }
     },
-    [fetchEvents]
+    [fetchEvents],
   );
 
   const loadNextPage = React.useCallback(async () => {
@@ -63,22 +52,30 @@ export default function HomeMainScreen({
     }
 
     loadPage(currentPage + 1, events);
-  }, [currentPage, isFetching, isLoading, loadPage]);
+  }, [
+    currentPage,
+    data?.pagination.total_pages,
+    events,
+    isFetching,
+    isLoading,
+    loadPage,
+  ]);
+
+  const onEventPress = (id: number) => {
+    // We could add some analytics here and what not.
+    navigation.navigate('EventModal', { id });
+  };
+
+  // On mount, load the first page
+  useEffectOnce(() => {
+    loadPage(1, []);
+  });
 
   return (
-    <View style={{ flex: 1, paddingTop: insets.top, backgroundColor: "white" }}>
-      <FlatList
-        contentContainerStyle={{ padding: 20, alignItems: "center" }}
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      <EventsGrid
         data={events}
-        numColumns={2}
-        columnWrapperStyle={{ gap: 12 }}
-        ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-        renderItem={({ item }) => (
-          <EventCard
-            event={item}
-            onPress={(id) => navigation.navigate("EventModal", { id })}
-          />
-        )}
+        onItemPress={onEventPress}
         ListFooterComponent={() => {
           // if (isError && !isFetching) {
           //   return (
@@ -86,7 +83,7 @@ export default function HomeMainScreen({
           //       isError={isError}
           //       isLoading={isLoading}
           //       refetch={loadNextPage}
-          //       message="Error fetching transactions"
+          //       message="Error fetching events"
           //     />
           //   );
           // }
@@ -95,7 +92,7 @@ export default function HomeMainScreen({
             return null;
           }
           return (
-            <View style={{ marginTop: 20 }}>
+            <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" />
             </View>
           );
@@ -108,3 +105,8 @@ export default function HomeMainScreen({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: 'white' },
+  loadingContainer: { marginTop: 20 },
+});

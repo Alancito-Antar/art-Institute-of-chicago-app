@@ -1,14 +1,10 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import TabBarIcon from "./TabBarIcon";
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { StyleSheet, View } from 'react-native';
+import TabBarIcon from './TabBarIcon';
 
-function TabBar({ state, navigation }: BottomTabBarProps) {
-  const insets = useSafeAreaInsets();
-
+export default function TabBar({ state, navigation }: BottomTabBarProps) {
   return (
-    <View style={{ flexDirection: "row", backgroundColor: "white" }}>
+    <View style={styles.container}>
       {state.routes.map((route, index) => {
         return (
           <TabBarIcon
@@ -23,4 +19,9 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
   );
 }
 
-export default TabBar;
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+  },
+});

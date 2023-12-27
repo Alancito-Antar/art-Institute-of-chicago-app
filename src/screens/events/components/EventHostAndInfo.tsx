@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { Event } from "../../../services/events/types";
-import moment from "moment";
+import moment from 'moment';
+import { StyleSheet, Text, View } from 'react-native';
+import { Event } from '../../../services/events/types';
 
 function EventInfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-      <Text style={{ fontWeight: "600" }}>{label}</Text>
+    <View style={styles.eventInfoRowContainer}>
+      <Text style={styles.eventInfoLabelText}>{label}</Text>
       <Text>{value}</Text>
     </View>
   );
@@ -23,16 +22,16 @@ export default function EventHostAndInfo({ event }: { event: Event }) {
   } = event;
   return (
     <View style={styles.container}>
-      <EventInfoRow label="Event host:" value={event_host_title || "Unknown"} />
+      <EventInfoRow label="Event host:" value={event_host_title || 'Unknown'} />
 
       <View>
         <EventInfoRow
           label="From:"
-          value={moment(start_date).format("dddd DD - MMM, yyyy")}
+          value={moment(start_date).format('dddd DD - MMM, yyyy')}
         />
         <EventInfoRow
           label="To:"
-          value={moment(end_date).format("dddd DD - MMM, yyyy")}
+          value={moment(end_date).format('dddd DD - MMM, yyyy')}
         />
       </View>
 
@@ -48,7 +47,8 @@ export default function EventHostAndInfo({ event }: { event: Event }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
     gap: 10,
   },
+  eventInfoRowContainer: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  eventInfoLabelText: { fontWeight: '600' },
 });
