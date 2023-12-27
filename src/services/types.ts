@@ -12,3 +12,8 @@ export interface PagedDataResponse<T> extends DataResponse<T> {
     current_page: number;
   };
 }
+
+export interface PaginationParams {
+  limit?: number; // Items per page
+  page?: number; // Current page
+}

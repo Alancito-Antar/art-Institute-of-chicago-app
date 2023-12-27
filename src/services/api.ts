@@ -1,10 +1,10 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
 import {
   BaseQueryFn,
   FetchArgs,
   fetchBaseQuery,
   FetchBaseQueryError,
-} from "@reduxjs/toolkit/query";
+} from '@reduxjs/toolkit/query';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 const baseQuery: BaseQueryFn<
   string | FetchArgs,
@@ -13,8 +13,8 @@ const baseQuery: BaseQueryFn<
   { noAuth?: boolean } | undefined
 > = async (args, WebApi, extraOptions) => {
   const rawBaseQuery = fetchBaseQuery({
-    baseUrl: "https://api.artic.edu/api/v1/",
-    prepareHeaders: (headers) => {
+    baseUrl: 'https://api.artic.edu/api/v1/',
+    prepareHeaders: headers => {
       return headers;
     },
   });
@@ -22,11 +22,11 @@ const baseQuery: BaseQueryFn<
 };
 
 // Define a service using a base URL and expected endpoints
-export const api = createApi({
-  reducerPath: "api",
+const api = createApi({
+  reducerPath: 'api',
   baseQuery,
   tagTypes: [],
-  endpoints: (_builder) => ({}),
+  endpoints: _builder => ({}),
 });
 
 export default api;

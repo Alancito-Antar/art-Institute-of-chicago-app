@@ -1,13 +1,13 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Event } from "../../services/events/types";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Event } from '../../services/events/types';
 
-const FavoritesStorageKey = "favorites";
+const FavoritesStorageKey = 'favorites';
 
 // Save favorites events to storage
 export async function saveFavoritesDataToStorage(updatedFavorites: Event[]) {
   return AsyncStorage.setItem(
     FavoritesStorageKey,
-    JSON.stringify(updatedFavorites)
+    JSON.stringify(updatedFavorites),
   );
 }
 

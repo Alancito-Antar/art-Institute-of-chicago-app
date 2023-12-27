@@ -1,11 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+/* eslint-disable import/no-cycle */
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Event } from '../../services/events/types';
+import { RootState } from '../store';
 import {
   clearFavoritesDataFromStorage,
   loadFavoritesDataFromStorage,
   saveFavoritesDataToStorage,
-} from "./storage";
-import { Event } from "../../services/events/types";
-import { RootState } from "../store";
+} from './storage';
 
 interface InitialState {
   events: Event[];
@@ -15,11 +16,11 @@ const initialState: InitialState = { events: [] };
 
 // Loads the data from storage and updates the store
 export const loadFavoritesData = createAsyncThunk<Event[] | undefined>(
-  "favorites/loadFavoritesData",
+  'favorites/loadFavoritesData',
   async (_, _thunkApi) => {
     const favorites = await loadFavoritesDataFromStorage();
     return favorites;
-  }
+  },
 );
 
 // Saves the favorite data to storage and updates the store (if it already exists we remove it)
@@ -29,10 +30,10 @@ export const saveFavoritesData = createAsyncThunk<
   {
     state: RootState;
   }
->("favorites/saveFavoritesData", async (event, thunkApi) => {
+>('favorites/saveFavoritesData', async (event, thunkApi) => {
   const currentState = thunkApi.getState().favorites;
   const currentEventIndex = currentState.events.findIndex(
-    (x) => x.id === event.id
+    x => x.id === event.id,
   );
 
   const updatedFavoritesEvents: Event[] = [...currentState.events];
@@ -51,18 +52,18 @@ export const saveFavoritesData = createAsyncThunk<
 
 // Remove the brands data from storage
 export const clearFavoritesData = createAsyncThunk<void, void>(
-  "favorites/clearFavoritesData",
+  'favorites/clearFavoritesData',
   async (_, _thunkApi) => {
     // Remove top brands data from storage
     await clearFavoritesDataFromStorage();
-  }
+  },
 );
 
-export const favoritesSlice = createSlice({
-  name: "favorites",
+const favoritesSlice = createSlice({
+  name: 'favorites',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // Loading
     builder.addCase(loadFavoritesData.fulfilled, (state, action) => {
       if (!action.payload) {
@@ -80,7 +81,7 @@ export const favoritesSlice = createSlice({
     });
 
     // Clearing
-    builder.addCase(clearFavoritesData.fulfilled, (state) => {
+    builder.addCase(clearFavoritesData.fulfilled, state => {
       state.events = initialState.events;
     });
   },

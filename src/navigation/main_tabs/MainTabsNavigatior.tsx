@@ -1,11 +1,11 @@
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
-import HomeStackNavigator from "./home/HomeNavigator";
-import FavoritesStackNavigator from "./favorites/FavoritesNavigator";
-import { MainTabsStackParamList } from "./types";
-import TabBar from "../../components/tab_bar/TabBar";
+} from '@react-navigation/bottom-tabs';
+import TabBar from '../../components/tab_bar/TabBar';
+import FavoritesStackNavigator from './favorites/FavoritesNavigator';
+import HomeStackNavigator from './home/HomeNavigator';
+import { MainTabsStackParamList } from './types';
 
 const MainTabsNavigationTabBar =
   createBottomTabNavigator<MainTabsStackParamList>();

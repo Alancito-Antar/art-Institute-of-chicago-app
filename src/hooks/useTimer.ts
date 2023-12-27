@@ -1,4 +1,5 @@
-import React from "react";
+import moment from 'moment';
+import React from 'react';
 
 // Use this guys cool logic for the timer and made some twikes! :)
 // https://benhur-martins.medium.com/how-to-create-a-countdown-timer-hook-for-your-react-project-f05f2c349637
@@ -37,13 +38,13 @@ const getTimeDiff = (diffInMSec: number): TimerData => {
   };
 };
 
-export function useTimer(targetTime: string) {
+export default function useTimer(targetTime: string) {
   const [timeLeft, setTimeLeft] = React.useState<number>(
-    Date.parse(targetTime) - Date.now()
+    moment(targetTime).diff(moment(new Date())),
   );
-  const [hasEnded, setHasEnded] = React.useState<boolean>(false);
-
-  console.log("Event end", timeLeft);
+  const [hasEnded, setHasEnded] = React.useState<boolean | undefined>(
+    undefined,
+  );
 
   React.useEffect(() => {
     const id = setTimeout(() => {
@@ -53,13 +54,14 @@ export function useTimer(targetTime: string) {
         return;
       }
 
-      setTimeLeft((prev) => prev - 1000);
+      setHasEnded(false);
+      setTimeLeft(prev => prev - 1000);
     }, 1000);
 
     return () => {
       clearTimeout(id);
     };
-  });
+  }, [timeLeft]);
 
   return { ...getTimeDiff(timeLeft), hasEnded };
 }

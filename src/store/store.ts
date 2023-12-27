@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { eventsApi } from "../services/events/events";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import api from "../services/api";
-import favoritesSlice from "./favorites/favoritesSlice";
+/* eslint-disable import/no-cycle */
+import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import api from '../services/api';
+import favoritesSlice from './favorites/favoritesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +12,7 @@ export const store = configureStore({
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(api.middleware),
 });
 

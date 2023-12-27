@@ -1,7 +1,7 @@
-import { CompositeScreenProps } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootNavigationTabParams } from "../../root/types";
-import { MainTabsNavigationParams } from "../types";
+import { CompositeScreenProps } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootNavigationTabParams } from '../../root/types';
+import { MainTabsNavigationParams } from '../types';
 
 export type HomeNavigationParams = {
   HomeMain: undefined;
@@ -12,7 +12,7 @@ export type HomeStackScreenProps<Screen extends keyof HomeNavigationParams> =
   CompositeScreenProps<
     NativeStackScreenProps<HomeNavigationParams, Screen>,
     CompositeScreenProps<
-      RootNavigationTabParams<"MainTabs">,
-      MainTabsNavigationParams<"Home">
+      RootNavigationTabParams<'MainTabs'>,
+      MainTabsNavigationParams<'Home'>
     >
   >;
