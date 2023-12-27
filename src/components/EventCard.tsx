@@ -5,6 +5,7 @@ import {
   Text,
   useWindowDimensions,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { Event } from '../services/events/types';
 
 export default function EventCard({
@@ -17,7 +18,7 @@ export default function EventCard({
   const { id, image_url, short_description } = event;
   const { width } = useWindowDimensions();
 
-  const ITEM_WIDTH = width / 2 - 20; // This is getting the whole screen width and dividing it by two (and substracting the padding)
+  const ITEM_WIDTH = width - 40; // This is getting the whole screen width and dividing it by two (and substracting the padding)
 
   return (
     <Pressable
@@ -35,12 +36,17 @@ export default function EventCard({
         style={styles.imageBackgroundContainer}
         source={{ uri: image_url }}
       >
-        {/* For some reason the short description comes as html content, so lets parse it */}
-        {short_description ? (
-          <Text style={styles.shortDescription} numberOfLines={3}>
-            {short_description.replace(/<\/?[^>]+(>|$)/g, '')}
-          </Text>
-        ) : null}
+        <LinearGradient
+          style={styles.linearGradientContainer}
+          colors={['transparent', 'transparent', 'black']}
+        >
+          {/* For some reason the short description comes as html content, so lets parse it */}
+          {short_description ? (
+            <Text style={styles.shortDescription} numberOfLines={3}>
+              {short_description.replace(/<\/?[^>]+(>|$)/g, '')}
+            </Text>
+          ) : null}
+        </LinearGradient>
       </ImageBackground>
     </Pressable>
   );
@@ -53,9 +59,17 @@ const styles = StyleSheet.create({
   },
   imageBackgroundContainer: {
     flex: 1,
-    padding: 10,
+  },
+  linearGradientContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingBottom: 20,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  shortDescription: { fontSize: 14, color: 'white' },
+  shortDescription: {
+    fontWeight: '400',
+    fontSize: 14,
+    color: 'white',
+  },
 });
