@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.artinstituteofchicagoapp-mergeDebugResources-34:/values-en-rIN/values-en-rIN.xml",
+            "outputFile": "com.artinstituteofchicagoapp-mergeDebugResources-35:/values-en-rIN/values-en-rIN.xml",
             "map": [
                 {
                     "source": "/Users/alanantar/.gradle/caches/transforms-3/13659b94c66de92d98d7f8af61234b95/transformed/core-1.9.0/res/values-en-rIN/values-en-rIN.xml",
