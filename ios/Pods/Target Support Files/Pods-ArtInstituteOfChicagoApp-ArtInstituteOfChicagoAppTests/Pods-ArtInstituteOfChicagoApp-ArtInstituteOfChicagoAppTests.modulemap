@@ -1,0 +1,6 @@
+module Pods_ArtInstituteOfChicagoApp_ArtInstituteOfChicagoAppTests {
+  umbrella header "Pods-ArtInstituteOfChicagoApp-ArtInstituteOfChicagoAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

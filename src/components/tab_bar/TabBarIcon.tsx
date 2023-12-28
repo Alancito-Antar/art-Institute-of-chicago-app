@@ -48,7 +48,7 @@ export default function TabBarIcon(props: TabBarIconProps) {
       style={[
         styles.container,
         {
-          paddingBottom: insets.bottom,
+          paddingBottom: insets.bottom || 10,
         },
       ]}
       onPress={onPress}

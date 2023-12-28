@@ -1,6 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Alert, Image, Pressable, StyleSheet, View } from 'react-native';
+import {
+  Alert,
+  Image,
+  ImageRequireSource,
+  Platform,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -11,6 +19,24 @@ import CalendarManager from '../../../native_modules/CalendarManager';
 import { Event } from '../../../services/events/types';
 import { saveFavoritesData } from '../../../store/favorites/favoritesSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+
+function EventHeaderAction({
+  imageSource,
+  onPress,
+}: {
+  imageSource: ImageRequireSource;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable accessibilityRole="button" onPress={onPress}>
+      <Image
+        style={styles.eventHeaderAction}
+        source={imageSource}
+        accessibilityIgnoresInvertColors
+      />
+    </Pressable>
+  );
+}
 
 export default function EventHeader({
   event,
@@ -81,41 +107,32 @@ export default function EventHeader({
   }, [event]);
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={[styles.container, { paddingTop: insets.top || 10 }]}>
       {/* The animated view will change the opacity of the BG */}
       <Animated.View style={[styles.animatedViewContainer, animatedStyles]} />
-      <Pressable accessibilityRole="button" onPress={navigation.goBack}>
-        <Image
-          style={styles.backButtonImage}
-          source={require('../../../assets/icons/event/ic_chevron_left.png')}
-          accessibilityIgnoresInvertColors
-        />
-      </Pressable>
+
+      <EventHeaderAction
+        imageSource={require('../../../assets/icons/event/ic_chevron_left.png')}
+        onPress={navigation.goBack}
+      />
 
       {event ? (
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-          <Pressable accessibilityRole="button" onPress={onSavedPressed}>
-            <Image
-              style={styles.backButtonImage}
-              source={
-                isFavorite
-                  ? require('../../../assets/icons/event/ic_favorites_full.png')
-                  : require('../../../assets/icons/common/ic_favorites.png')
-              }
-              accessibilityIgnoresInvertColors
-            />
-          </Pressable>
+        <View style={styles.headerActionsContainer}>
+          <EventHeaderAction
+            imageSource={
+              isFavorite
+                ? require('../../../assets/icons/event/ic_favorites_full.png')
+                : require('../../../assets/icons/common/ic_favorites.png')
+            }
+            onPress={onSavedPressed}
+          />
 
-          <Pressable
-            accessibilityRole="button"
-            onPress={onAddCalendarEventPress}
-          >
-            <Image
-              style={styles.backButtonImage}
-              source={require('../../../assets/icons/event/ic_calendar.png')}
-              accessibilityIgnoresInvertColors
+          {Platform.OS === 'ios' ? (
+            <EventHeaderAction
+              imageSource={require('../../../assets/icons/event/ic_calendar.png')}
+              onPress={onAddCalendarEventPress}
             />
-          </Pressable>
+          ) : null}
         </View>
       ) : null}
     </View>
@@ -136,13 +153,18 @@ const styles = StyleSheet.create({
   },
   animatedViewContainer: {
     position: 'absolute',
-    height: 100,
+    height: Platform.OS === 'android' ? 48 : 100,
     left: 0,
     right: 0,
     zIndex: -10,
     backgroundColor: 'white',
   },
-  backButtonImage: {
+  headerActionsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  eventHeaderAction: {
     width: 20,
     height: 20,
     tintColor: '#B60235',

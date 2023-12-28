@@ -1,0 +1,122 @@
+[
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-hdpi_ic_launcher_background.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-hdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-mdpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-mdpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-xhdpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-xhdpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-xxhdpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-xxhdpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/layout_launch_screen.xml.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/layout/launch_screen.xml"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-xxxhdpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-xxxhdpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/xml_network_security_config.xml.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxxhdpi_ic_launcher_monochrome.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxxhdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-ldpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-ldpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable-hdpi_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable-hdpi/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable_rn_edit_text_material.xml.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-hdpi_ic_launcher_monochrome.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-hdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-mdpi_ic_launcher_monochrome.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-mdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xhdpi_ic_launcher_monochrome.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xhdpi/ic_launcher_monochrome.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/drawable_launch_screen.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/drawable/launch_screen.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-mdpi_ic_launcher_background.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-mdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-merged_res-36:/mipmap-xxhdpi_ic_launcher_monochrome.png.flat",
+        "source": "/Users/alanantar/.gradle/daemon/8.3/com.artinstituteofchicagoapp-main-38:/mipmap-xxhdpi/ic_launcher_monochrome.png"
+    }
+]

@@ -4,6 +4,7 @@ import EventsList from '../../components/EventsList';
 import { processFavoritesEvents } from '../../helpers/events';
 import { FavoritesStackScreenProps } from '../../navigation/main_tabs/favorites/types';
 import { useAppSelector } from '../../store/hooks';
+import EmptyFavoritesEventList from './components/EmptyFavoritesEventList';
 
 export default function FavoritesMainScreen({
   navigation,
@@ -21,6 +22,7 @@ export default function FavoritesMainScreen({
       <EventsList
         sections={processFavoritesEvents(favoritesEvents)}
         onItemPress={onEventPress}
+        ListEmptyComponent={<EmptyFavoritesEventList />}
       />
     </View>
   );

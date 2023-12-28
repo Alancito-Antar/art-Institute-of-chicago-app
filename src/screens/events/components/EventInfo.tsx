@@ -17,11 +17,21 @@ export default function EventInfo({ event }: { event: Event }) {
   return (
     <View>
       <Text style={styles.infoTitleText}>{title}</Text>
-      <RenderHTML contentWidth={width} source={source} />
+      <RenderHTML
+        contentWidth={width}
+        source={source}
+        baseStyle={styles.infoHtmlBaseStyle}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  infoTitleText: { marginBottom: 10, fontSize: 18, fontWeight: '700' },
+  infoTitleText: {
+    marginBottom: 10,
+    fontSize: 18,
+    fontWeight: '700',
+    color: 'black',
+  },
+  infoHtmlBaseStyle: { color: 'black' },
 });

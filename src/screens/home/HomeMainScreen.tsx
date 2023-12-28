@@ -1,6 +1,12 @@
 /* eslint-disable import/no-cycle */
 import React from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventsList from '../../components/EventsList';
 import { processEventsNewPage } from '../../helpers/events';
@@ -77,7 +83,7 @@ export default function HomeMainScreen({
     loadPage(1, []);
   });
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <EventsListSkeleton />;
   }
 
@@ -86,6 +92,12 @@ export default function HomeMainScreen({
       <EventsList
         sections={events}
         onItemPress={onEventPress}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading || isFetching}
+            onRefresh={() => loadPage(1, [])}
+          />
+        }
         ListFooterComponent={() => {
           // if (isError && !isFetching) {
           //   return (
@@ -106,6 +118,17 @@ export default function HomeMainScreen({
               <ActivityIndicator size="large" />
             </View>
           );
+        }}
+        ListEmptyComponent={() => {
+          if (isLoading || isFetching) {
+            return (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" />
+              </View>
+            );
+          }
+
+          return null;
         }}
         onEndReachedThreshold={1}
         onEndReached={loadNextPage}

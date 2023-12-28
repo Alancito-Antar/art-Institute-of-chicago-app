@@ -52,6 +52,7 @@ export default function EventActions({ event }: { event: Event }) {
             <RenderHTML
               source={{ html: buy_button_caption }}
               contentWidth={width}
+              baseStyle={styles.eventActionsBaseStyle}
             />
           </View>
 
@@ -87,4 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   eventBuyButtonText: { fontWeight: '600', color: 'white' },
+  eventActionsBaseStyle: {
+    color: 'black',
+  },
 });

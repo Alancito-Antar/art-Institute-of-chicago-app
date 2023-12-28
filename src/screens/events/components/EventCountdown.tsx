@@ -17,22 +17,22 @@ export default function EventCountdown({
   if (hasEnded === undefined) {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Loading...</Text>
+        <Text style={styles.headingText}>Loading...</Text>
       </View>
     );
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>
+      <Text style={styles.headingText}>
         {hasEnded ? 'Ended' : isEventOngoing ? 'Starts in:' : 'Ending in:'}
       </Text>
 
       {!hasEnded ? (
         <View style={styles.countdownContainer}>
-          <Text>{days}d</Text>
-          <Text>{hours}h</Text>
-          <Text>{minutes}m</Text>
-          <Text>{seconds}s</Text>
+          <Text style={styles.countdownItemText}>{days}d</Text>
+          <Text style={styles.countdownItemText}>{hours}h</Text>
+          <Text style={styles.countdownItemText}>{minutes}m</Text>
+          <Text style={styles.countdownItemText}>{seconds}s</Text>
         </View>
       ) : null}
     </View>
@@ -43,14 +43,18 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 30,
   },
-  heading: {
+  headingText: {
     alignSelf: 'center',
     fontSize: 24,
     fontWeight: '700',
+    color: 'black',
   },
   countdownContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: 10,
+  },
+  countdownItemText: {
+    color: 'black',
   },
 });

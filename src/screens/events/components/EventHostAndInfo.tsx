@@ -6,7 +6,7 @@ function EventInfoRow({ label, value }: { label: string; value: string }) {
   return (
     <View style={styles.eventInfoRowContainer}>
       <Text style={styles.eventInfoLabelText}>{label}</Text>
-      <Text>{value}</Text>
+      <Text style={styles.eventInfoValueText}>{value}</Text>
     </View>
   );
 }
@@ -50,5 +50,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   eventInfoRowContainer: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  eventInfoLabelText: { fontWeight: '600' },
+  eventInfoLabelText: { fontWeight: '600', color: 'black' },
+  eventInfoValueText: { color: 'black' },
 });

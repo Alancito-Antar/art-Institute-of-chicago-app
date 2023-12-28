@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="react_native_dev_server_port">8088</integer>
+    <integer name="react_native_inspector_proxy_port">8088</integer>
+    <string name="app_name">Art Institute Of ChicagoApp</string>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        
+        <item name="android:editTextBackground">@layout/launch_screen</item>
+    </style>
+</resources>
