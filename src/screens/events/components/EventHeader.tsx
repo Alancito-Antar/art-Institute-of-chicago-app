@@ -1,11 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { Alert, Image, Pressable, StyleSheet, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CalendarManager from '../../../native_modules/CalendarManager';
 import { Event } from '../../../services/events/types';
 import { saveFavoritesData } from '../../../store/favorites/favoritesSlice';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -46,6 +48,38 @@ export default function EventHeader({
     dispatch(saveFavoritesData(event));
   };
 
+  const onAddCalendarEventPress = React.useCallback(async () => {
+    if (!event) {
+      return;
+    }
+
+    const onError = (e: unknown) => Alert.alert('Whoops!', e as string);
+    const onSuccess = (message: string) => Alert.alert('Yeeey!', message);
+
+    Alert.alert(
+      'Add Event to Calendar',
+      "Hey there! Do you want to add this event to your phone's calendar app?",
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Lets go for it!',
+          onPress: () =>
+            CalendarManager.addEventToCalendar(
+              event?.title,
+              event?.location,
+              event?.start_date,
+              event?.end_date,
+              onError,
+              onSuccess,
+            ),
+        },
+      ],
+    );
+  }, [event]);
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
       {/* The animated view will change the opacity of the BG */}
@@ -59,17 +93,30 @@ export default function EventHeader({
       </Pressable>
 
       {event ? (
-        <Pressable accessibilityRole="button" onPress={onSavedPressed}>
-          <Image
-            style={styles.backButtonImage}
-            source={
-              isFavorite
-                ? require('../../../assets/icons/event/ic_favorites_full.png')
-                : require('../../../assets/icons/common/ic_favorites.png')
-            }
-            accessibilityIgnoresInvertColors
-          />
-        </Pressable>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+          <Pressable accessibilityRole="button" onPress={onSavedPressed}>
+            <Image
+              style={styles.backButtonImage}
+              source={
+                isFavorite
+                  ? require('../../../assets/icons/event/ic_favorites_full.png')
+                  : require('../../../assets/icons/common/ic_favorites.png')
+              }
+              accessibilityIgnoresInvertColors
+            />
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            onPress={onAddCalendarEventPress}
+          >
+            <Image
+              style={styles.backButtonImage}
+              source={require('../../../assets/icons/event/ic_calendar.png')}
+              accessibilityIgnoresInvertColors
+            />
+          </Pressable>
+        </View>
       ) : null}
     </View>
   );
