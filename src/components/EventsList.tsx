@@ -21,12 +21,12 @@ function SectionLabel({ date }: { date: string }) {
 // Little re-usable grid for events so it mantains the same syle for favorites and main screen
 // Thought we dont use the API call here so each screen can give the items they want (favorites, or API events)
 
-interface EventsGridProps extends SectionListProps<Event> {
+interface EventsListProps extends SectionListProps<Event> {
   onItemPress: (id: number) => void;
 }
 
 // I'll omit here the render item prop so its not require.
-export default function EventsGrid(props: Omit<EventsGridProps, 'renderItem'>) {
+export default function EventsList(props: Omit<EventsListProps, 'renderItem'>) {
   const { onItemPress } = props;
 
   return (

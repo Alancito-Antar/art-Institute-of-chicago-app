@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import EventsGrid from '../../components/EventsGrid';
+import EventsList from '../../components/EventsList';
 import { processFavoritesEvents } from '../../helpers/events';
 import { FavoritesStackScreenProps } from '../../navigation/main_tabs/favorites/types';
 import { useAppSelector } from '../../store/hooks';
@@ -18,7 +18,7 @@ export default function FavoritesMainScreen({
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <EventsGrid
+      <EventsList
         sections={processFavoritesEvents(favoritesEvents)}
         onItemPress={onEventPress}
       />

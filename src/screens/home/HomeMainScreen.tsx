@@ -2,12 +2,13 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import EventsGrid from '../../components/EventsGrid';
+import EventsList from '../../components/EventsList';
 import { processEventsNewPage } from '../../helpers/events';
 import useEffectOnce from '../../hooks/useEffectOnce';
 import { HomeStackScreenProps } from '../../navigation/main_tabs/home/types';
 import { useLazyGetEventsQuery } from '../../services/events/events';
 import { Event } from '../../services/events/types';
+import EventsListSkeleton from './components/skeleton/EventsListSkeleton';
 
 export interface EventGroup {
   groupDate: string;
@@ -76,9 +77,13 @@ export default function HomeMainScreen({
     loadPage(1, []);
   });
 
+  if (isLoading || isFetching) {
+    return <EventsListSkeleton />;
+  }
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <EventsGrid
+      <EventsList
         sections={events}
         onItemPress={onEventPress}
         ListFooterComponent={() => {

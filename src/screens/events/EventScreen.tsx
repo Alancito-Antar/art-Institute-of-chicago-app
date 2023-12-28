@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -13,6 +13,7 @@ import EventHeader from './components/EventHeader';
 import EventHostAndInfo from './components/EventHostAndInfo';
 import EventImage from './components/EventImage';
 import EventInfo from './components/EventInfo';
+import EventSkeleton from './components/skeleton/EventSkeleton';
 
 export default function EventScreen({
   navigation,
@@ -52,7 +53,7 @@ export default function EventScreen({
     return (
       <View style={styles.loadingContainer}>
         <EventHeader offsetY={offset} />
-        <ActivityIndicator color="#B60235" />
+        <EventSkeleton />
       </View>
     );
   }
@@ -92,8 +93,6 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   contentContainer: {
     paddingHorizontal: 10,
