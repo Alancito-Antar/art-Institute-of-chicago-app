@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import InlineError from '../../components/InlineError';
 import { RootNavigationTabParams } from '../../navigation/root/types';
 import { useGetEventByIdQuery } from '../../services/events/events';
 import EventActions from './components/EventActions';
@@ -29,7 +30,8 @@ export default function EventScreen({
     data: event,
     isLoading,
     isFetching,
-    error,
+    isError,
+    refetch,
   } = useGetEventByIdQuery({ id });
 
   const scrollHandler = useAnimatedScrollHandler(
@@ -58,8 +60,18 @@ export default function EventScreen({
     );
   }
 
-  if (!event) {
-    return null;
+  if (!event || isError) {
+    return (
+      <View style={styles.errorContainer}>
+        <EventHeader event={event} offsetY={offset} />
+        <InlineError
+          isError={!isError}
+          isLoading={isLoading}
+          message="There was an error loading the event..."
+          refetch={refetch}
+        />
+      </View>
+    );
   }
 
   return (
@@ -74,8 +86,6 @@ export default function EventScreen({
         onScroll={scrollHandler}
       >
         <View style={styles.contentContainer}>
-          {error ? <Text>{JSON.stringify(error)}</Text> : null}
-
           <EventCountdown event={event} />
           <EventImage event={event} />
           <EventHostAndInfo event={event} />
@@ -93,6 +103,10 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
   contentContainer: {
     paddingHorizontal: 10,

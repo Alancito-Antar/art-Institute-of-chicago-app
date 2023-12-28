@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.artinstituteofchicagoapp-mergeDebugResources-34:/values-fr/values-fr.xml",
+            "outputFile": "com.artinstituteofchicagoapp-mergeDebugResources-35:/values-fr/values-fr.xml",
             "map": [
                 {
                     "source": "/Users/alanantar/.gradle/caches/transforms-3/65f520f887f0d0f390437980af8cd371/transformed/jetified-react-android-0.73.1-debug/res/values-fr/values-fr.xml",

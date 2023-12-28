@@ -4,16 +4,17 @@ import {
   ActivityIndicator,
   RefreshControl,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventsList from '../../components/EventsList';
+import InlineError from '../../components/InlineError';
 import { processEventsNewPage } from '../../helpers/events';
 import useEffectOnce from '../../hooks/useEffectOnce';
 import { HomeStackScreenProps } from '../../navigation/main_tabs/home/types';
 import { useLazyGetEventsQuery } from '../../services/events/events';
 import { Event } from '../../services/events/types';
+import EmptyEventList from './components/EmptyEventList';
 import EventsListSkeleton from './components/skeleton/EventsListSkeleton';
 
 export interface EventGroup {
@@ -28,7 +29,7 @@ export default function HomeMainScreen({
   const [currentPage, setCurrentPage] = React.useState<number>(0);
   const [events, setEvents] = React.useState<EventGroup[]>([]);
 
-  const [fetchEvents, { data, isLoading, isFetching, error }] =
+  const [fetchEvents, { data, isLoading, isFetching, isError }] =
     useLazyGetEventsQuery();
 
   const insets = useSafeAreaInsets();
@@ -94,47 +95,36 @@ export default function HomeMainScreen({
         onItemPress={onEventPress}
         refreshControl={
           <RefreshControl
-            refreshing={isLoading || isFetching}
+            refreshing={events.length > 0 && (isLoading || isFetching)}
             onRefresh={() => loadPage(1, [])}
           />
         }
         ListFooterComponent={() => {
-          // if (isError && !isFetching) {
-          //   return (
-          //     <InlineLoadError
-          //       isError={isError}
-          //       isLoading={isLoading}
-          //       refetch={loadNextPage}
-          //       message="Error fetching events"
-          //     />
-          //   );
-          // }
+          if (isError && !isFetching) {
+            return (
+              <InlineError
+                isError={isError}
+                isLoading={isLoading}
+                refetch={loadNextPage}
+                message="Error fetching events"
+              />
+            );
+          }
 
           if (!isFetching) {
             return null;
           }
+
           return (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" />
             </View>
           );
         }}
-        ListEmptyComponent={() => {
-          if (isLoading || isFetching) {
-            return (
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" />
-              </View>
-            );
-          }
-
-          return null;
-        }}
+        ListEmptyComponent={<EmptyEventList />}
         onEndReachedThreshold={1}
         onEndReached={loadNextPage}
       />
-
-      {error ? <Text>{JSON.stringify(error)}</Text> : null}
     </View>
   );
 }

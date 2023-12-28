@@ -23,9 +23,12 @@ function RootNavigator() {
         />
       </RootNavigationStack.Group>
 
-      {/* Modals */}
+      {/* Modals - and all accesable screens - This is here so any screen (favorites or main, or whatever) can open them */}
       <RootNavigationStack.Group
-        screenOptions={{ presentation: 'fullScreenModal' }}
+        screenOptions={{
+          // presentation: 'fullScreenModal',
+          animation: 'fade',
+        }}
       >
         <RootNavigationStack.Screen name="EventModal" component={EventScreen} />
       </RootNavigationStack.Group>
