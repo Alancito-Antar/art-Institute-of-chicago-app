@@ -47,5 +47,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>$(PRODUCT_NAME) will use your calendar for letting you store your desire event on it.</string>
 </dict>
 </plist>
