@@ -11,8 +11,6 @@ export default function useCachedResources() {
       try {
         // Favorites
         await store.dispatch(loadFavoritesData());
-
-        // await store.dispatch(loadFeatureFlags());
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);

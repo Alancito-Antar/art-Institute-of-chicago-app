@@ -1,5 +1,9 @@
 /* eslint-disable import/no-cycle */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  cancelTriggerNotification,
+  createTriggerNotification,
+} from '../../helpers/notifee';
 import { Event } from '../../services/events/types';
 import { RootState } from '../store';
 import {
@@ -39,10 +43,12 @@ export const saveFavoritesData = createAsyncThunk<
   const updatedFavoritesEvents: Event[] = [...currentState.events];
 
   if (currentEventIndex !== -1) {
-    // Event is already on the list. Lets remove it.
+    // Event is already on the list. Lets cancel the triggered notification and remove it from favorites.
+    cancelTriggerNotification(event.id);
     updatedFavoritesEvents.splice(currentEventIndex, 1);
   } else {
-    // If it does not exists, lets add it.
+    // If it does not exists, lets create notification trigger and add it to favorites.
+    createTriggerNotification(event);
     updatedFavoritesEvents.push(event);
   }
 

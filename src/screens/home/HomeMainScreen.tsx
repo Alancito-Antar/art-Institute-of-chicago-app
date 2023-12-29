@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import EventsList from '../../components/EventsList';
 import InlineError from '../../components/InlineError';
 import { processEventsNewPage } from '../../helpers/events';
+import { askNotificationsPermissions } from '../../helpers/notifee';
 import useEffectOnce from '../../hooks/useEffectOnce';
 import { HomeStackScreenProps } from '../../navigation/main_tabs/home/types';
 import { useLazyGetEventsQuery } from '../../services/events/events';
@@ -81,6 +82,7 @@ export default function HomeMainScreen({
 
   // On mount, load the first page
   useEffectOnce(() => {
+    askNotificationsPermissions();
     loadPage(1, []);
   });
 
@@ -121,7 +123,12 @@ export default function HomeMainScreen({
             </View>
           );
         }}
-        ListEmptyComponent={<EmptyEventList />}
+        ListEmptyComponent={() => {
+          if (events.length === 0 && (isLoading || isFetching)) {
+            return null;
+          }
+          return <EmptyEventList />;
+        }}
         onEndReachedThreshold={1}
         onEndReached={loadNextPage}
       />
