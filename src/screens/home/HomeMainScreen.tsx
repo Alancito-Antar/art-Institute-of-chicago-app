@@ -46,7 +46,7 @@ export default function HomeMainScreen({
           page,
         }).unwrap();
 
-        setEvents(processEventsNewPage(newEvents, currentData));
+        setEvents(processEventsNewPage(newEvents.data, currentData));
         setCurrentPage(page);
       } catch {
         // No need to do anything, isError will be set in the hook return value

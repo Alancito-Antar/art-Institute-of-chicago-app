@@ -17,11 +17,13 @@ export default function EventInfo({ event }: { event: Event }) {
   return (
     <View>
       <Text style={styles.infoTitleText}>{title}</Text>
-      <RenderHTML
-        contentWidth={width}
-        source={source}
-        baseStyle={styles.infoHtmlBaseStyle}
-      />
+      {source ? (
+        <RenderHTML
+          contentWidth={width}
+          source={source}
+          baseStyle={styles.infoHtmlBaseStyle}
+        />
+      ) : null}
     </View>
   );
 }
