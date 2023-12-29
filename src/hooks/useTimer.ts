@@ -48,7 +48,6 @@ export default function useTimer(targetTime: string) {
 
   React.useEffect(() => {
     const id = setTimeout(() => {
-      // We can set conditions here like timeLeft > 0
       if (timeLeft <= 0) {
         setHasEnded(true);
         return;

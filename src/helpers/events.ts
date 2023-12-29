@@ -11,9 +11,8 @@ export const processEventsNewPage = (
   const eventsGroups: EventGroup[] =
     previousData !== undefined ? [...previousData] : [];
 
-  // For each transaction
   newPage.data.forEach(event => {
-    // First we check if we already have a group for this transaction date
+    // First we check if we already have a group for this event date
     const lastGroup =
       eventsGroups.length > 0
         ? eventsGroups[eventsGroups.length - 1]
@@ -40,9 +39,8 @@ export const processFavoritesEvents = (events: Event[]) => {
   // Create a new array to hold the groups
   const eventsGroups: EventGroup[] = [];
 
-  // For each transaction
   events.forEach(event => {
-    // First we check if we already have a group for this transaction date
+    // First we check if we already have a group for this event date
     const lastGroup =
       eventsGroups.length > 0
         ? eventsGroups[eventsGroups.length - 1]
