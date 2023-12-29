@@ -2,7 +2,6 @@ import api from '../api';
 import { DataResponse, PagedDataResponse, PaginationParams } from '../types';
 import { Event } from './types';
 
-// Define a service using a base URL and expected endpoints
 export const eventsApi = api.injectEndpoints({
   overrideExisting: true,
   endpoints: builder => ({

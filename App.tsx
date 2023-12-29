@@ -3,12 +3,12 @@ import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-redux';
 import useCachedResources from './src/hooks/useCachedResources';
-import useNotiffe from './src/hooks/useNotiffe';
+import useNotifee from './src/hooks/useNotifee';
 import RootNavigator from './src/navigation/root/RootNavigatior';
 import { store } from './src/store/store';
 
 export default function App() {
-  useNotiffe();
+  useNotifee();
 
   const isLoadingComplete = useCachedResources();
 
