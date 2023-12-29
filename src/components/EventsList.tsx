@@ -18,7 +18,7 @@ function SectionLabel({ date }: { date: string }) {
   );
 }
 
-// Little re-usable grid for events so it mantains the same syle for favorites and main screen
+// Little re-usable section list for events so it mantains the same syle for favorites and main screen
 // Thought we dont use the API call here so each screen can give the items they want (favorites, or API events)
 
 interface EventsListProps extends SectionListProps<Event> {

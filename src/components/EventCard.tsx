@@ -1,10 +1,5 @@
-import {
-  ImageBackground,
-  Pressable,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { Event } from '../services/events/types';
 
@@ -18,7 +13,7 @@ export default function EventCard({
   const { id, image_url, short_description } = event;
   const { width } = useWindowDimensions();
 
-  const ITEM_WIDTH = width - 40; // This is getting the whole screen width and dividing it by two (and substracting the padding)
+  const ITEM_WIDTH = width - 40; // This is getting the whole screen width less the horizontal margins
 
   return (
     <Pressable
@@ -32,9 +27,10 @@ export default function EventCard({
       ]}
       onPress={() => onPress(id)}
     >
-      <ImageBackground
+      <FastImage
         style={styles.imageBackgroundContainer}
-        source={{ uri: image_url }}
+        source={{ uri: image_url, priority: FastImage.priority.normal }}
+        defaultSource={require('../assets/images/img_event_placeholder.png')}
       >
         <LinearGradient
           style={styles.linearGradientContainer}
@@ -47,7 +43,7 @@ export default function EventCard({
             </Text>
           ) : null}
         </LinearGradient>
-      </ImageBackground>
+      </FastImage>
     </Pressable>
   );
 }
